@@ -1,3 +1,4 @@
-import * as Landing from "./Landing/Landing";
+import * as Home from "./Home/Home";
+import * as UrlShortener from "./UrlShortener/UrlShortener";
 
-export { Landing };
+export { Home, UrlShortener };

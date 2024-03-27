@@ -22,6 +22,7 @@ dotenv.config();
 
 // Routers
 app.use(`${Constants.System.ROOT}/`, Routers.Home);
+app.use(`${Constants.System.ROOT}/shorten`, Routers.Shorten);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
