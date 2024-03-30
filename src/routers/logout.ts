@@ -1,8 +1,8 @@
 import express from "express";
 import * as Controllers from "../controllers";
-import { isAuth } from "src/middlewares";
+
 const router = express.Router();
 
-router.get("/", isAuth, Controllers.Home.home);
+router.get("/logut", Controllers.logout);
 
 export default router;

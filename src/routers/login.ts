@@ -1,8 +1,8 @@
 import express from "express";
 import * as Controllers from "../controllers";
-import { isAuth } from "src/middlewares";
+import { checklogin } from "src/middlewares";
 const router = express.Router();
 
-router.get("/", isAuth, Controllers.Home.home);
+router.post("/", checklogin, Controllers.login.login);
 
 export default router;
