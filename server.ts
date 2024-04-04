@@ -8,6 +8,7 @@ import * as Middlewares from "./src/middlewares";
 import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import cookieParser from "cookie-parser";
+import * as Controllers from "./src/controllers";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(`${Constants.System.ROOT}/shorten`, Routers.Shorten);
 app.use(`${Constants.System.ROOT}/signup`, Routers.signup);
 app.use(`${Constants.System.ROOT}/login`, Routers.login);
 app.use(`${Constants.System.ROOT}/logout`, Routers.logout);
+app.get("/:shortId", Controllers.Redirect.redirect);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);

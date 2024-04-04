@@ -7,6 +7,8 @@ export const logout: Interfaces.Middlewares.Async = async (_req, res, next) => {
     return res.json(Utils.Response.success("Logged out successfully"));
   } catch (error) {
     console.log(error);
-    return next(Utils.Response.error("Error in logout Middleware", 401));
+    return next(
+      Utils.Response.error("Error encountered while logging out", 401)
+    );
   }
 };

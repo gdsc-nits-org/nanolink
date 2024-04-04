@@ -39,10 +39,6 @@ export const login: Interfaces.Middlewares.Async = async (req, res, next) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge: 3600000 });
 
     return res.json(Utils.Response.success("Loggedin Successfully"));
-    // const { msg, status } = Utils.Response.success(
-    //   "Login Successfull"
-    // );
-    // return res.json({ msg, status, user: existingUser, token});
   } catch (error) {
     console.log(error);
     return next(Utils.Response.error("Error in Login"));

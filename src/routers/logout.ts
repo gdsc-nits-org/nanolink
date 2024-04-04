@@ -3,6 +3,6 @@ import * as Controllers from "../controllers";
 
 const router = express.Router();
 
-router.get("/logut", Controllers.logout);
+router.get("/", Controllers.logout);
 
 export default router;
