@@ -31,6 +31,7 @@ app.use(`${Constants.System.ROOT}/signup`, Routers.signup);
 app.use(`${Constants.System.ROOT}/login`, Routers.login);
 app.use(`${Constants.System.ROOT}/logout`, Routers.logout);
 app.use(`${Constants.System.ROOT}/url/delete`, Routers.deleteUrl);
+app.use(`${Constants.System.ROOT}/url/manage`, Routers.manageUrl);
 
 app.get("/:shortId", Controllers.Redirect.redirect);
 

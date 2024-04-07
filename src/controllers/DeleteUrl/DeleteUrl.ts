@@ -20,7 +20,7 @@ const DeleteUrl: Interfaces.Controllers.Auth = async (req, res, next) => {
         id: id,
       },
     });
-    console.log(result, id);
+    // console.log(result, id);
     if (!result) {
       return next(Utils.Response.error("Error in deleting the url"));
     }
