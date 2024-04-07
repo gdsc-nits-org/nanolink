@@ -15,11 +15,6 @@ const DeleteUrl: Interfaces.Controllers.Auth = async (req, res, next) => {
     if (!url) {
       return next(Utils.Response.error("Url not found"));
     }
-    // if (url.userId !== req.user.userId) {
-    //   return next(
-    //     Utils.Response.error("You are not authorized to delete this url")
-    //   );
-    // }
     const result = await prisma.url.delete({
       where: {
         id: id,
@@ -30,7 +25,7 @@ const DeleteUrl: Interfaces.Controllers.Auth = async (req, res, next) => {
       return next(Utils.Response.error("Error in deleting the url"));
     }
     const { msg, status } = Utils.Response.success("Url deleted successfully");
-    return res.json({ msg, status, result });
+    return res.json({ msg, status });
   } catch (error) {
     console.log(error);
     return next(Utils.Response.error("Error in deleting the url"));

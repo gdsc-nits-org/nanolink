@@ -19,7 +19,7 @@ export const isAuth: Interfaces.Middlewares.Auth = async (req, res, next) => {
         return res.status(401).json({ message: "Unauthorized - Invalid user" });
       }
       req.user = user; // Add the 'user' property to the 'req' object
-      next(req);
+      next();
     } catch (error) {
       console.log(error);
       if (error instanceof jwt.JsonWebTokenError) {
