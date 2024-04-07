@@ -5,5 +5,15 @@ import * as login from "./login/login";
 import * as signup from "./signup/signup";
 import * as Redirect from "./redirect/redirect";
 import * as DeleteUrl from "./DeleteUrl/DeleteUrl";
+import * as Analytics from "./Analytics";
 
-export { Home, UrlShortener, login, signup, logout, Redirect, DeleteUrl };
+export {
+  Home,
+  UrlShortener,
+  login,
+  signup,
+  logout,
+  Redirect,
+  DeleteUrl,
+  Analytics,
+};
