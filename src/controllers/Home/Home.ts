@@ -2,19 +2,23 @@ import * as Interfaces from "../../interfaces";
 import * as Utils from "../../utils";
 import prisma from "prisma/prismaClient";
 
-const home: Interfaces.Controllers.Async = async (_req, res, next) => {
-  // const data = await prisma.url.findMany();
+const home: Interfaces.Controllers.Auth = async (req, res, next) => {
   try {
     // const { msg, status } = Success.System.api;
     // const response = {
     //   msg,
     //   status,
     // };
-    const data = await prisma.url.findMany();
+    // console.log(req.user);
+    const data = await prisma.url.findMany({
+      where: {
+        userId: req.user.id,
+      },
+    });
     return res.json(data);
   } catch (error) {
     console.log(error);
-    return next(Utils.Response.error("Error in sending the mail"));
+    return next(Utils.Response.error("Error in home controller"));
   }
 };
 
