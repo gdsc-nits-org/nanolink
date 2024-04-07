@@ -4,5 +4,6 @@ import { logout } from "./logout";
 import * as login from "./login/login";
 import * as signup from "./signup/signup";
 import * as Redirect from "./redirect/redirect";
+import manage from "./manage/manage";
 
-export { Home, UrlShortener, login, signup, logout, Redirect };
+export { Home, UrlShortener, login, signup, logout, Redirect, manage };

@@ -30,6 +30,8 @@ app.use(`${Constants.System.ROOT}/shorten`, Routers.Shorten);
 app.use(`${Constants.System.ROOT}/signup`, Routers.signup);
 app.use(`${Constants.System.ROOT}/login`, Routers.login);
 app.use(`${Constants.System.ROOT}/logout`, Routers.logout);
+// app.use(`${Constants.System.ROOT}/manage`, Routers.manage);
+app.use("/manage", Routers.manage);
 app.get("/:shortId", Controllers.Redirect.redirect);
 
 // Error Handlers
