@@ -7,6 +7,7 @@ import * as Redirect from "./redirect/redirect";
 import * as DeleteUrl from "./DeleteUrl/DeleteUrl";
 import * as ManageUrl from "./Manage";
 import * as Analytics from "./Analytics";
+import * as FetchUrl from "./FetchAllUrl";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   DeleteUrl,
   ManageUrl,
   Analytics,
+  FetchUrl,
 };

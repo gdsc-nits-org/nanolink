@@ -33,6 +33,7 @@ app.use(`${Constants.System.ROOT}/login`, Routers.login);
 app.use(`${Constants.System.ROOT}/logout`, Routers.logout);
 app.use(`${Constants.System.ROOT}/url/delete`, Routers.deleteUrl);
 app.use(`${Constants.System.ROOT}/url/manage`, Routers.manageUrl);
+app.use(`${Constants.System.ROOT}/url/fetchAll`, Routers.fetchAllUrl);
 app.use(`${Constants.System.ROOT}/analytics`, AnalyticsRouter);
 
 app.get("/:shortId", Controllers.Redirect.redirect);
