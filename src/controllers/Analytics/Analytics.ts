@@ -1,8 +1,8 @@
 // import { Request, Response, NextFunction } from "express";
-import * as Interfaces from "../interfaces";
-import * as Utils from "../utils";
+import * as Interfaces from "../../interfaces";
+import * as Utils from "../../utils";
 
-import prisma from "../../prisma/prismaClient";
+import prisma from "../../../prisma/prismaClient";
 
 const getAnalytics: Interfaces.Middlewares.Async = async (_req, res, next) => {
   try {
