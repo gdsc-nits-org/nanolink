@@ -37,11 +37,9 @@ export const manage: Interfaces.Controllers.Auth = async (req, res, next) => {
     }
     if (shortId) {
       if (url.shortUrl !== `${req.hostname}:${process.env.PORT}/${shortId}`) {
-        return res
-          .status(400)
-          .json({
-            msg: "ShortId already exists in the database. Please try another one.",
-          });
+        return res.status(400).json({
+          msg: "ShortId already exists in the database. Please try another one.",
+        });
       }
       updatedUrl = await prisma.url.update({
         where: {
