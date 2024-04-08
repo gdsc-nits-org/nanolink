@@ -49,7 +49,7 @@ export const signup: Interfaces.Controllers.Async = async (req, res, next) => {
     const { msg, status } = Utils.Response.success(
       "User signed up successfully"
     );
-    return res.json({ msg, status, user: newUser, token });
+    return res.json({ msg, status });
   } catch (error) {
     console.log(error);
     return next(Utils.Response.error("Error in signup"));
