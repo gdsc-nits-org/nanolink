@@ -1,13 +1,26 @@
-// import { Request, Response, NextFunction } from "express";
 import * as Interfaces from "../../interfaces";
 import * as Utils from "../../utils";
-
 import prisma from "../../../prisma/prismaClient";
 
-const getAnalytics: Interfaces.Middlewares.Async = async (_req, res, next) => {
+// Define the getAnalytics middleware function
+const getAnalytics: Interfaces.Middlewares.Auth = async (req, res, next) => {
   try {
-    // Fetch analytics data from the database
+    // Extract user ID from the request object (assuming it's set by authentication middleware)
+    const userId = req.user?.id;
+
+    // Check if user ID is available
+    if (!userId) {
+      return next(Utils.Response.error("User ID not provided")); // Return an error if user ID is not available
+    }
+
+    // Fetch analytics data for the currently logged-in user
     const analyticsData = await prisma.url.findMany({
+      where: {
+        // Filter analytics data based on user ID
+        user: {
+          id: userId,
+        },
+      },
       select: {
         id: true,
         originalUrl: true,
@@ -27,4 +40,5 @@ const getAnalytics: Interfaces.Middlewares.Async = async (_req, res, next) => {
   }
 };
 
+// Export the getAnalytics middleware function
 export { getAnalytics };
