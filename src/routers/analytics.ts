@@ -5,6 +5,6 @@ import * as Controllers from "../controllers";
 const router = express.Router();
 
 // Endpoint to get analytics data
-router.get("/", isAuth, Controllers.Analytics.getAnalytics);
+router.get("/:urlId", isAuth, Controllers.Analytics.getAnalytics);
 
 export default router;

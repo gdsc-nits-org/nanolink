@@ -2,24 +2,22 @@ import * as Interfaces from "../../interfaces";
 import * as Utils from "../../utils";
 import prisma from "../../../prisma/prismaClient";
 
-// Define the getAnalytics middleware function
 const getAnalytics: Interfaces.Middlewares.Auth = async (req, res, next) => {
   try {
-    // Extract user ID from the request object (assuming it's set by authentication middleware)
-    const userId = req.user?.id;
+    const userId = req.user?.id; // Extract user ID from the request object
 
     // Check if user ID is available
     if (!userId) {
-      return next(Utils.Response.error("User ID not provided")); // Return an error if user ID is not available
+      return next(Utils.Response.error("User ID not provided"));
     }
 
-    // Fetch analytics data for the currently logged-in user
-    const analyticsData = await prisma.url.findMany({
+    const urlId = req.params.urlId; // Extract URL ID from the request parameters
+
+    // Fetch the URL based on the URL ID and the associated user ID
+    const url = await prisma.url.findFirst({
       where: {
-        // Filter analytics data based on user ID
-        user: {
-          id: userId,
-        },
+        id: urlId,
+        userId: userId, // Filter by both URL ID and user ID
       },
       select: {
         id: true,
@@ -32,8 +30,13 @@ const getAnalytics: Interfaces.Middlewares.Auth = async (req, res, next) => {
       },
     });
 
+    // Check if the URL belongs to the logged-in user
+    if (!url) {
+      return next(Utils.Response.error("URL not found or unauthorized"));
+    }
+
     // Return analytics data as response
-    return res.json(analyticsData);
+    return res.json(url);
   } catch (error) {
     console.log(error);
     return next(Utils.Response.error("Error fetching analytics data"));
