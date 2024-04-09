@@ -6,7 +6,7 @@
 ## Getting Started
 
 #### Understanding the folder structure
-```json
+```lua
 ├── prisma
 │   └── schema.prisma
 ├── src
@@ -45,7 +45,7 @@
 ## Installation
 
 Clone the repository:
-```json
+```markdown
   git clone https://github.com/gdsc-nits-org/nanolink.git
 ```
 
@@ -61,18 +61,12 @@ Install dependencies:
 ```
 
 Create a '.env' file in the root directory and set the following environment variables:
-```json
+```markdown
   MONGODB_URI="mongodb://johndoe:randompassword@localhost:27017/mydb"
 
 ```
 Adjust the `port` and `MONGODB_URI` values as needed.
 
-
-
-##  Database Setup
-
-1. Ensure that your MongoDB server is running.
-2. Create a database named 'url-shortener' (or the name specified in your '.env' file).
 ##  Database Setup
 
 1. Ensure that your MongoDB server is running.
@@ -173,7 +167,6 @@ To run tests, run the following command
 ]
 
 ```
-
 ## Middleware
 ### 1. Authentication Middleware
 
