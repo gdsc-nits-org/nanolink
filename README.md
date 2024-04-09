@@ -5,42 +5,7 @@
 
 ## Getting Started
 
-#### Understanding the folder structure
-```lua
-├── prisma
-│   └── schema.prisma
-├── src
-│   ├── controllers
-│   │   ├── Home
-│   │   |── UrlShortner
-|   |   |── login
-|   |   |── manage
-│   │   ├── redirect
-│   │   |── signup
-│   │   ├── analytics
-│   │   |── deleteUrl
-|   |
-│   ├── globals
-│   │── interfaces 
-│   │── interfaces   
-│   ├── middlewares
-│   ├── routers
-│   ├── utils
-│── server.ts
-│── README.md
-```
-
-1. The Database schema is in `schema/prisma.schema`
-2. `server.ts` is the starting point for the application.
-3. API Controllers should be made inside `src/controllers`. Use subdirectories or files as per need.
-4. API Middlewares exist in `src/middlewares`.
-5. Once the Controllers and Middlewares are made, those are exposed at endpoints in `src/routers`.
-6. Every Controller and Middleware function is of type `Interfaces.Controllers.Async` or `Interfaces.Middlewares.Async` (A Sync variant exists too). All these interfaces are written in `src/interfaces`.
-7. Any utility functions (for the purpose of abstracting/reusing code in Controllers/Middlewares) should be made in `src/utils`.
-8. `src/global` directory contains constants and helper functions for handling responses and error.
-
-
-
+Prerequisites Node.js (>= version 14) MongoDB (Make sure MongoDB is installed and running)
 
 ## Installation
 
@@ -62,11 +27,14 @@ Install dependencies:
 
 Create a '.env' file in the root directory and set the following environment variables:
 ```markdown
-  MONGODB_URI="mongodb://johndoe:randompassword@localhost:27017/mydb"
-
+  MONGODB_URI=mongodb://localhost:3000/nanolink
 ```
 Adjust the `port` and `MONGODB_URI` values as needed.
 
+##  Database Setup
+
+1. Ensure that your MongoDB server is running.
+2. Create a database named 'url-shortener' (or the name specified in your '.env' file).
 ##  Database Setup
 
 1. Ensure that your MongoDB server is running.
@@ -79,12 +47,11 @@ To run tests, run the following command
   npm run dev
 ```
 
-
 ## Endpoints
 
 ### 1.  User Signup
 1. Method: POST
-2. Endpoint: /api/signup
+2. Endpoint: /api/v1/signup
 3. Request Body:
 
 
@@ -107,7 +74,7 @@ To run tests, run the following command
 ```
 ### 2. User Login
 1. Method: POST
-2. Endpoint: /api/login
+2. Endpoint: /api/v1/login
 3. Request Body:
 
 
@@ -130,13 +97,13 @@ To run tests, run the following command
 ```
 ### 3. Shorten URL
 1. Method: POST
-2. Endpoint: /api/shorten
+2. Endpoint: /api/v1/shorten
 3. Request Body:
 
 
 ```json
   {
-  "longUrl": "https://example.com/very/long/url"
+  "originalUrl": "https://example.com/very/long/url"
 }
 
 ```
@@ -150,7 +117,7 @@ To run tests, run the following command
 ```
 ### 4. Manage Shortened URLs
 1. Method: POST
-2. Endpoint: /api/manage
+2. Endpoint: /api/v1/manage
 3. Request Body:
 
 
@@ -158,11 +125,11 @@ To run tests, run the following command
  [
   {
     "shortCode": "abc123",
-    "longUrl": "https://example.com/very/long/url",
+    "originalUrl": "https://example.com/very/long/url",
   },
   {
     "shortCode": "def456",
-    "longUrl": "https://example.com/another/long/url",
+    "originalUr": "https://example.com/another/long/url",
   }
 ]
 
