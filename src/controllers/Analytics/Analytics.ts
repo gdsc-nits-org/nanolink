@@ -12,7 +12,9 @@ const getAnalytics: Interfaces.Middlewares.Auth = async (req, res, next) => {
     }
 
     const urlId = req.params.urlId; // Extract URL ID from the request parameters
-
+    if (!urlId) {
+      return next(Utils.Response.error("URL ID not provided"));
+    }
     // Fetch the URL based on the URL ID and the associated user ID
     const url = await prisma.url.findFirst({
       where: {
@@ -32,7 +34,7 @@ const getAnalytics: Interfaces.Middlewares.Auth = async (req, res, next) => {
 
     // Check if the URL belongs to the logged-in user
     if (!url) {
-      return next(Utils.Response.error("URL not found or unauthorized"));
+      return next(Utils.Response.error("URL not found"));
     }
 
     // Return analytics data as response

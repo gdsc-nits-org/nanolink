@@ -9,7 +9,6 @@ import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import cookieParser from "cookie-parser";
 import * as Controllers from "./src/controllers";
-import AnalyticsRouter from "./src/routers/analytics";
 
 const app = express();
 
@@ -34,7 +33,7 @@ app.use(`${Constants.System.ROOT}/logout`, Routers.logout);
 app.use(`${Constants.System.ROOT}/url/delete`, Routers.deleteUrl);
 app.use(`${Constants.System.ROOT}/url/manage`, Routers.manageUrl);
 app.use(`${Constants.System.ROOT}/url/fetchAll`, Routers.fetchAllUrl);
-app.use(`${Constants.System.ROOT}/analytics`, AnalyticsRouter);
+app.use(`${Constants.System.ROOT}/analytics`, Routers.analytics);
 
 app.get("/:shortId", Controllers.Redirect.redirect);
 

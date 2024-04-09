@@ -6,6 +6,7 @@ import { logout } from "src/controllers";
 import deleteUrl from "./deleteUrl";
 import manageUrl from "./manage";
 import fetchAllUrl from "./fetchAllUrl";
+import analytics from "./analytics";
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   deleteUrl,
   manageUrl,
   fetchAllUrl,
+  analytics,
 };

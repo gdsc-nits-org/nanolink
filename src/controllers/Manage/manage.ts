@@ -36,7 +36,7 @@ export const manage: Interfaces.Controllers.Auth = async (req, res, next) => {
       });
     }
     if (shortId) {
-      if (url.shortUrl !== `${req.hostname}:${process.env.PORT}/${shortId}`) {
+      if (url.shortUrl !== `${req.hostname}/${shortId}`) {
         return res.status(400).json({
           msg: "ShortId already exists in the database. Please try another one.",
         });
@@ -46,7 +46,7 @@ export const manage: Interfaces.Controllers.Auth = async (req, res, next) => {
           id: id,
         },
         data: {
-          shortUrl: `${req.hostname}:${process.env.PORT}/${shortId}`,
+          shortUrl: `${req.hostname}/${shortId}`,
           updatedAt: time,
           clickedCount: 0,
           lastClicked: "Never",

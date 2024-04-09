@@ -12,7 +12,7 @@ const UrlShortener: Interfaces.Controllers.Auth = async (req, res, next) => {
     const time = moment().format("MMMM Do YYYY, h:mm:ss a");
     const { originalUrl } = req.body;
     const shortId = nanoid(6);
-    const shortUrl = `${req.hostname}:${process.env.PORT}/${shortId}`;
+    const shortUrl = `${req.hostname}/${shortId}`;
     const result = await prisma.url.create({
       data: {
         originalUrl,
