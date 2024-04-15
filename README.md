@@ -138,7 +138,7 @@ To run tests, run the following command
 3. Request Body:
 
 
-```http
+```bash
   {
    DELETE/api/v1/DeleteUrl/abc123
 }
@@ -159,7 +159,7 @@ To run tests, run the following command
 3. Request Body:
 
 
-```http
+```bash
   {
    GET/api/v1/getAnalytics/abc123
 }
