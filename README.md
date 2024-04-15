@@ -21,13 +21,13 @@ Change into the project directory:
 ```
 Install dependencies:
 ```bash
-   npm install
+   pnpm install
 
 ```
 
 Create a '.env' file in the root directory and set the following environment variables:
 ```markdown
-  MONGODB_URI=mongodb://localhost:3000/nanolink
+  MONGODB_URI="mongodb://johndoe:randompassword@localhost:27017/mydb"
 ```
 Adjust the `port` and `MONGODB_URI` values as needed.
 
@@ -35,17 +35,15 @@ Adjust the `port` and `MONGODB_URI` values as needed.
 
 1. Ensure that your MongoDB server is running.
 2. Create a database named 'url-shortener' (or the name specified in your '.env' file).
-##  Database Setup
 
-1. Ensure that your MongoDB server is running.
-2. Create a database named 'url-shortener' (or the name specified in your '.env' file).
 ## Running Tests
 
 To run tests, run the following command
 
 ```bash
-  npm run dev
+  pnpm run dev
 ```
+
 
 ## Endpoints
 
@@ -125,13 +123,61 @@ To run tests, run the following command
  [
   {
     "shortCode": "abc123",
-    "originalUrl": "https://example.com/very/long/url",
+    "longUrl": "https://example.com/very/long/url",
   },
   {
     "shortCode": "def456",
-    "originalUr": "https://example.com/another/long/url",
+    "longUrl": "https://example.com/another/long/url",
   }
 ]
+
+```
+### 5. DeleteUrl
+1. Method: DELETE
+2. Endpoint: /api/v1/DeleteUrl
+3. Request Body:
+
+
+```http
+  {
+   DELETE/api/v1/DeleteUrl/abc123
+}
+
+```
+4. Responses:
+
+```json
+ {
+  "success": true,
+  "message": "URL deleted successfully"
+}
+
+```
+### 6. analytics
+1. Method: GET
+2. Endpoint: /api/v1/getAnalytics
+3. Request Body:
+
+
+```http
+  {
+   GET/api/v1/getAnalytics/abc123
+}
+
+```
+4. Responses:
+
+```json
+ {
+  "id": "abc123",
+  "originalUrl": "https://example.com/very/long/url",
+  "shortUrl": "https://our-nanolink/abc123",
+  "clickedCount": 100,
+  "lastClicked": "2024-04-15T12:00:00Z",
+  "createdAt": "2024-04-01T12:00:00Z",
+  "updatedAt": "2024-04-15T12:00:00Z"
+}
+
 
 ```
 ## Middleware
