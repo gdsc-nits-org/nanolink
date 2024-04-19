@@ -28,8 +28,12 @@ Install dependencies:
 Create a '.env' file in the root directory and set the following environment variables:
 ```markdown
   MONGODB_URI="mongodb://johndoe:randompassword@localhost:27017/mydb"
+  PORT="RANDOM_PORT"
+  JWT_SECRET_KEY="STRONG_SECRET_KEY"
 ```
 Adjust the `port` and `MONGODB_URI` values as needed.
+
+
 
 ##  Database Setup
 
@@ -120,52 +124,38 @@ To run tests, run the following command
 
 
 ```json
- [
   {
     "shortCode": "abc123",
-    "longUrl": "https://example.com/very/long/url",
+    "originalUrl": "https://example.com/very/long/url",
   },
+
+```
+
+4. Responses:
+
+```json
   {
     "shortCode": "def456",
-    "longUrl": "https://example.com/another/long/url",
+    "originalUrl": "https://example.com/another/long/url",
   }
-]
 
 ```
 ### 5. DeleteUrl
 1. Method: DELETE
-2. Endpoint: /api/v1/DeleteUrl
-3. Request Body:
-
-
-```bash
-  {
-   DELETE/api/v1/DeleteUrl/abc123
-}
-
-```
-4. Responses:
+2. Endpoint: /api/v1/DeleteUrl/shortUrl_ID
+3. Responses:
 
 ```json
  {
-  "success": true,
+  "status": 200,
   "message": "URL deleted successfully"
 }
 
 ```
 ### 6. analytics
 1. Method: GET
-2. Endpoint: /api/v1/getAnalytics
-3. Request Body:
-
-
-```bash
-  {
-   GET/api/v1/getAnalytics/abc123
-}
-
-```
-4. Responses:
+2. Endpoint: /api/v1/getAnalytics/shortUrl_ID
+3. Responses:
 
 ```json
  {
@@ -180,6 +170,7 @@ To run tests, run the following command
 
 
 ```
+
 ## Middleware
 ### 1. Authentication Middleware
 

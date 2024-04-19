@@ -1,9 +1,9 @@
-import express from "express";
-import * as Controllers from "../controllers";
+import { isAuth } from "src/middlewares";
+import * as controllers from "../controllers";
+import { Router } from "express";
 
-const router = express.Router();
+const router = Router();
 
-// Define the route for managing URLs
-router.post("/", Controllers.manage);
+router.post("/:id", isAuth, controllers.ManageUrl.manage);
 
 export default router;

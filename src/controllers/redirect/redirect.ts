@@ -6,7 +6,7 @@ import moment from "moment";
 const redirect: Interfaces.Middlewares.Async = async (req, res, next) => {
   try {
     const { shortId } = req.params;
-    const shortUrl = `${req.hostname}:${process.env.PORT}/${shortId}`;
+    const shortUrl = `${req.hostname}/${shortId}`;
     const url = await prisma.url.findUnique({
       where: {
         shortUrl: shortUrl,
@@ -14,7 +14,7 @@ const redirect: Interfaces.Middlewares.Async = async (req, res, next) => {
     });
 
     if (!url) {
-      return next(Utils.Response.error("ShortUrl not found"));
+      return next(Utils.Response.error("Url not found"));
     }
     const updatedUrl = await prisma.url.update({
       where: {

@@ -4,6 +4,20 @@ import { logout } from "./logout";
 import * as login from "./login/login";
 import * as signup from "./signup/signup";
 import * as Redirect from "./redirect/redirect";
-import manage from "./manage/manage";
+import * as DeleteUrl from "./DeleteUrl/DeleteUrl";
+import * as ManageUrl from "./manage";
+import * as Analytics from "./Analytics/Analytics";
+import * as FetchUrl from "./FetchAllUrl";
 
-export { Home, UrlShortener, login, signup, logout, Redirect, manage };
+export {
+  Home,
+  UrlShortener,
+  login,
+  signup,
+  logout,
+  Redirect,
+  DeleteUrl,
+  ManageUrl,
+  Analytics,
+  FetchUrl,
+};
