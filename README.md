@@ -7,6 +7,9 @@
 
 Prerequisites Node.js (>= version 14) MongoDB (Make sure MongoDB is installed and running)
 
+
+
+
 ## Installation
 
 Clone the repository:
@@ -60,6 +63,8 @@ To run tests, run the following command
 ```json
   {
   "username": "example_user",
+  "name": "xyz",
+  "email": "abc@gmail.com",
   "password": "password"
 }
 
@@ -68,8 +73,8 @@ To run tests, run the following command
 
 ```json
   {
-  "success": true,
   "message": "User signed up successfully"
+  "status": 200,
 }
 
 
@@ -91,8 +96,8 @@ To run tests, run the following command
 
 ```json
   {
-  "success": true,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+   "status": 200,
+    "msg": "Loggedin Successfully"
 }
 
 
@@ -113,19 +118,49 @@ To run tests, run the following command
 
 ```json
   {
-  "shortUrl": "https://our-nanolink/abc123"
+    "msg": "Url shortened successfully",
+    "status": 200,
+    "shortUrl": "https://our-nanolink/abc123"
 }
 
 ```
-### 4. Manage Shortened URLs
+### 4. Fetch All URLs
+1. Method: GET
+2. Endpoint: /api/v1/url/fetchAll
+3. Request Body:
+
+
+```json
+{
+   "userId": "66235a95d41ea94865cc01e6"
+    
+}
+
+```
+
+4. Responses:
+
+```json
+  {
+        "id": "66235b13d41ea94865cc01e8",
+        "originalUrl": "https//:google.com",
+        "shortUrl": "localhost/st6Wnp",
+        "clickedCount": 0,
+        "lastClicked": "Never",
+        "createdAt": "April 20th 2024, 11:35:07 am",
+        "updatedAt": "April 20th 2024, 11:35:07 am",
+        "userId": "66235a95d41ea94865cc01e6"
+    }
+
+```
+### 5. Manage Shortened URLs
 1. Method: POST
-2. Endpoint: /api/v1/manage
+2. Endpoint: /api/v1/url/manage/shortUrl_ID
 3. Request Body:
 
 
 ```json
   {
-    "shortCode": "abc123",
     "originalUrl": "https://example.com/very/long/url",
   },
 
@@ -134,13 +169,12 @@ To run tests, run the following command
 4. Responses:
 
 ```json
-  {
-    "shortCode": "def456",
-    "originalUrl": "https://example.com/another/long/url",
-  }
+ "msg": "Url updated successfully",
+ "status": 200
+
 
 ```
-### 5. DeleteUrl
+### 6. DeleteUrl
 1. Method: DELETE
 2. Endpoint: /api/v1/DeleteUrl/shortUrl_ID
 3. Responses:
@@ -152,25 +186,24 @@ To run tests, run the following command
 }
 
 ```
-### 6. analytics
+### 7. analytics
 1. Method: GET
-2. Endpoint: /api/v1/getAnalytics/shortUrl_ID
+2. Endpoint: /api/v1/analytics/shortUrl_ID
 3. Responses:
 
 ```json
  {
-  "id": "abc123",
-  "originalUrl": "https://example.com/very/long/url",
-  "shortUrl": "https://our-nanolink/abc123",
-  "clickedCount": 100,
-  "lastClicked": "2024-04-15T12:00:00Z",
-  "createdAt": "2024-04-01T12:00:00Z",
-  "updatedAt": "2024-04-15T12:00:00Z"
+    "id": "6622da11df9bf4bfb7a347cf",
+    "originalUrl": "https://example.com/very/long/url",
+    "shortUrl": "localhost/ofib6x",
+    "clickedCount": 0,
+    "lastClicked": "Never",
+    "createdAt": "April 20th 2024, 2:24:40 am",
+    "updatedAt": "April 20th 2024, 2:24:40 am"
 }
 
 
 ```
-
 ## Middleware
 ### 1. Authentication Middleware
 
