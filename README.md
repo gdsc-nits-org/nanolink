@@ -1,119 +1,216 @@
-# MENP-T
-MongoDB + Express + Node + Prisma + TypeScript API Template
+# NANO-LINK
+
+#### MongoDB + Express + Node + Prisma + TypeScript API Template
 
 
 ## Getting Started
 
-### Understanding the folder structure
-```
-├── prisma
-│   └── schema.prisma
-├── server.ts
-├── src
-│   ├── controllers
-│   │   ├── health
-│   │   └── index.ts
-│   ├── globals
-│   │   ├── constants
-│   │   ├── errors
-│   │   └── success
-│   ├── interfaces
-│   ├── middlewares
-│   ├── routers
-│   └── utils
+Prerequisites Node.js (>= version 14) MongoDB (Make sure MongoDB is installed and running)
+
+
+
+
+## Installation
+
+Clone the repository:
+```markdown
+  git clone https://github.com/gdsc-nits-org/nanolink.git
 ```
 
-1. The Database schema is in `schema/prisma.schema`
-2. `server.ts` is the starting point for the application
-3. API Controllers should be made inside `src/controllers`. Use subdirectories or files as per need.
-4. API Middlewares exist in `src/middlewares`.
-5. Once the Controllers and Middlewares are made, those are exposed at endpoints in `src/routers`.
-6. Every Controller and Middleware function is of type `Interfaces.Controllers.Async` or `Interfaces.Middlewares.Async` (A Sync variant exists too). All these interfaces are written in `src/interfaces`.
-7. Any utility functions (for the purpose of abstracting/reusing code in Controllers/Middlewares) should be made in `src/utils`.
-8. `src/global` directory contains constants and helper functions for handling responses and error.
+Change into the project directory:
+```bash
+  cd nanolink
 
-## Demo
-Let's create a DEMO `GET` endpoint at `/test` which returns a message `"Hello from test"`
+```
+Install dependencies:
+```bash
+   pnpm install
 
-1. Create a folder in `src/controllers` named `test`. Inside this folder, create a file called `get.ts`.
+```
 
-```ts
-// src/controllers/test/get.ts
+Create a '.env' file in the root directory and set the following environment variables:
+```markdown
+  MONGODB_URI="mongodb://johndoe:randompassword@localhost:27017/mydb"
+  PORT="RANDOM_PORT"
+  JWT_SECRET_KEY="STRONG_SECRET_KEY"
+```
+Adjust the `port` and `MONGODB_URI` values as needed.
 
-import * as Interfaces from "../../interfaces"
-import * as Utils from "../../utils"
 
-const get: Interfaces.Controllers.Sync = (req, res, next) => {
-  /*
-    We could use `return res.json("Hello from test")` too
-    but the response json would be of the structure:
-    "Hello from test".
-    To maintain uniformity across all response objects,
-    we will use Utils.Response.success() and Utils.Response.error() helper functions.
-    We pass into these function the actual data we need to send to the client
-    and these function would create a json structure of:
-    {
-      "status" : 200
-      "msg" : "Actual Data"
-    }
-    Similarly, Utils.Response.error would create a similar object but with status code 400.
-    **It is always recommended to send the response to the client through these helper functions only.**
-  */
-  return res.json(Utils.Response.success("Hello from test"))
+
+##  Database Setup
+
+1. Ensure that your MongoDB server is running.
+2. Create a database named 'url-shortener' (or the name specified in your '.env' file).
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  pnpm run dev
+```
+
+
+## Endpoints
+
+### 1.  User Signup
+1. Method: POST
+2. Endpoint: /api/v1/signup
+3. Request Body:
+
+
+```json
+  {
+  "username": "example_user",
+  "name": "xyz",
+  "email": "abc@gmail.com",
+  "password": "password"
 }
 
-export { get };
+```
+4. Responses:
+
+```json
+  {
+  "message": "User signed up successfully"
+  "status": 200,
+}
+
+
+```
+### 2. User Login
+1. Method: POST
+2. Endpoint: /api/v1/login
+3. Request Body:
+
+
+```json
+  {
+  "username": "example_user",
+  "password": "password"
+}
+
+```
+4. Responses:
+
+```json
+  {
+   "status": 200,
+    "msg": "Loggedin Successfully"
+}
+
+
+```
+### 3. Shorten URL
+1. Method: POST
+2. Endpoint: /api/v1/shorten
+3. Request Body:
+
+
+```json
+  {
+  "originalUrl": "https://example.com/very/long/url"
+}
+
+```
+4. Responses:
+
+```json
+  {
+    "msg": "Url shortened successfully",
+    "status": 200,
+    "shortUrl": "https://our-nanolink/abc123"
+}
+
+```
+### 4. Fetch All URLs
+1. Method: GET
+2. Endpoint: /api/v1/url/fetchAll
+3. Request Body:
+
+
+```json
+{
+   "userId": "66235a95d41ea94865cc01e6"
+    
+}
+
 ```
 
-2. Next, create an `index.ts` inside `src/controllers/test` and import-export all the controllers. In this case simply import the `get` controller and export it.
+4. Responses:
 
-```ts
-// src/controllers/test/index.ts
-import { get } from "./get"
-export { get }
+```json
+  {
+        "id": "66235b13d41ea94865cc01e8",
+        "originalUrl": "https//:google.com",
+        "shortUrl": "localhost/st6Wnp",
+        "clickedCount": 0,
+        "lastClicked": "Never",
+        "createdAt": "April 20th 2024, 11:35:07 am",
+        "updatedAt": "April 20th 2024, 11:35:07 am",
+        "userId": "66235a95d41ea94865cc01e6"
+    }
+
+```
+### 5. Manage Shortened URLs
+1. Method: POST
+2. Endpoint: /api/v1/url/manage/shortUrl_ID
+3. Request Body:
+
+
+```json
+  {
+    "originalUrl": "https://example.com/very/long/url",
+  },
+
 ```
 
-3. Now edit the `src/controllers/index.ts` file to import all controllers inside `src/controllers/test`
-```ts
-// src/controllers/test/index.ts
-import * as Health from "./health";
-import * as Test from "./test"
-export { Health, Test };
+4. Responses:
+
+```json
+ "msg": "Url updated successfully",
+ "status": 200
+
+
 ```
+### 6. DeleteUrl
+1. Method: DELETE
+2. Endpoint: /api/v1/DeleteUrl/shortUrl_ID
+3. Responses:
 
-4. Now, lets expose our newly made controller at the endpoint `/test`. In the `src/routers` directory, create a new file named `test.ts`.
+```json
+ {
+  "status": 200,
+  "message": "URL deleted successfully"
+}
 
-```ts
-// src/routers/test.ts
-import express from "express";
-import * as Controllers from "../controllers";
-
-const router = express.Router();
-
-router.get("/", Controllers.Test.get);
-
-export default router;
 ```
+### 7. analytics
+1. Method: GET
+2. Endpoint: /api/v1/analytics/shortUrl_ID
+3. Responses:
 
-5. Notice the mount-point for the controller is `/` and not `/test`. This is because, we haven't mounted this router onto our server yet. When we mount it on the server, we will mount this router on `/test`. So, doing a GET request on `/test/` will hit our Controller function. Import export the router object similarly.
+```json
+ {
+    "id": "6622da11df9bf4bfb7a347cf",
+    "originalUrl": "https://example.com/very/long/url",
+    "shortUrl": "localhost/ofib6x",
+    "clickedCount": 0,
+    "lastClicked": "Never",
+    "createdAt": "April 20th 2024, 2:24:40 am",
+    "updatedAt": "April 20th 2024, 2:24:40 am"
+}
 
-6. Mounting the router is simple. Simple edit `server.ts` and add the following line:
 
-```ts
-// server.ts
-...
-app
-  .use(cors())
-  .use(helmet())
-  .use(morgan("dev"))
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }));
-
-// Routers
-app.use(`${Constants.System.ROOT}/`, Routers.Health);
-app.use(`${Constants.System.ROOT}/test`, Routers.Test);
-
-// Error Handlers
-app.use(Middlewares.Error.errorHandler);
-...
 ```
+## Middleware
+### 1. Authentication Middleware
+
+1. Purpose: Verifies the JWT token sent by the client and adds the authenticated user's information to the request object.
+
+2. Usage: Applied to protected routes that require authentication.
+
+## Contributing
+
+Contributions are always welcome!

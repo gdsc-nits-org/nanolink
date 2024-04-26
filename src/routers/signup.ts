@@ -1,8 +1,9 @@
 import express from "express";
 import * as Controllers from "../controllers";
-// import { isAuth } from "src/middlewares";
+import { check } from "src/middlewares";
+
 const router = express.Router();
 
-router.get("/", Controllers.Home.home);
+router.post("/", check, Controllers.signup.signup);
 
 export default router;
